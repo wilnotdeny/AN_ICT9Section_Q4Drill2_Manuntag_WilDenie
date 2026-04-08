@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Heat Index Checker</title>
+    <style>
+          body{
+                background-image: url(heat.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+            }
+
+            .container{
+                background-color: orange;
+                padding: 50px;
+                border-radius: 15px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 1);
+                opacity: 0.8;
+            }
+
+            h2{
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 50px;
+                text-align: center;
+                color: rgb(162, 27, 27);
+            }
+
+
+            p,h3,label{
+                color: rgb(162, 27, 27);
+            }
+
+            button{
+                background-color: rgb(136, 1, 1);
+                border-radius: 8px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Heat Index Checker</h2>
+        
+        <h3> Instructions :</h3>
+         <p>Input the temperature (°C) and humidity (%), the click Check to see the heat index and its status.</p>
+        
+        <br>
+
+        <div>
+            <label>Degrees in Celsius:</label>
+            <input type="number" id="temp" class="form-control">
+        </div>
+
+        <div>
+            <label>Humidity in %:</label>
+            <input type="number" id="humid" class="form-control">
+        </div>
+        <br> 
+
+        <button onclick="checkHeat()" class="btn btn-primary">Check Status</button>
+        
+        <div id="display"></div>
+
+        <script>
+            function checkHeat() {
+                let temperature = parseFloat(document.getElementById("temp").value);
+                let humidity = parseFloat(document.getElementById("humid").value);
+                let status = "";
+
+                let HeatIndex = temperature + (0.33 * humidity) - 4;
+
+                if (HeatIndex <= 27) {
+                    status = "Comfortable / Cool";
+                } else if (HeatIndex <= 32) {
+                    status = "Warm";
+                } else if (HeatIndex <= 37) {
+                    status = "Hot";
+                } else if (HeatIndex <= 41) {
+                    status = "Very Hot / Caution";
+                } else if (HeatIndex >= 42) {
+                    status = "Extreme Heat / Danger";
+                }
+                    else {
+                        alert("Please fill everything in before checking!");
+                    }
+
+                document.getElementById('display').innerHTML = 
+                    "Heat Index: " + HeatIndex.toFixed(1) + "°C <br> Status: " + status;
+            }
+        </script>
+    </div>
+</body>
+</html>
